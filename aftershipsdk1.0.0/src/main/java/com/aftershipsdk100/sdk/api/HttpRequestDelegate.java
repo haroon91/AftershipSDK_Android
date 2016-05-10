@@ -1,4 +1,4 @@
-package com.aftershipsdk100.api.api;
+package com.aftershipsdk100.sdk.api;
 
 /**
  * Functions as a bridge between http request and the json response

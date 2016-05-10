@@ -1,12 +1,12 @@
-package com.aftershipsdk100.api.api;
+package com.aftershipsdk100.sdk.api;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import com.aftershipsdk100.api.model.Checkpoint;
-import com.aftershipsdk100.api.model.CustomFields;
-import com.aftershipsdk100.api.model.Tracking;
+import com.aftershipsdk100.sdk.model.Checkpoint;
+import com.aftershipsdk100.sdk.model.CustomFields;
+import com.aftershipsdk100.sdk.model.Tracking;
 
 import org.json.JSONArray;
 import org.json.JSONException;

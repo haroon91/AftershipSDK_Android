@@ -1,4 +1,4 @@
-package com.aftershipsdk100.api.model;
+package com.aftershipsdk100.sdk.model;
 
 /**
  * Data structure for information about custom fields inside of a tracking detail

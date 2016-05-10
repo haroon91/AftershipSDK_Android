@@ -6,13 +6,13 @@ import android.os.Handler;
 import android.util.Log;
 
 import com.aftershipsdk.R;
-import com.aftershipsdk100.api.api.ApiDataManager;
-import com.aftershipsdk100.api.api.ApiRequestDelegate;
-import com.aftershipsdk100.api.api.ApiResult;
-import com.aftershipsdk100.api.api.HttpRequest;
-import com.aftershipsdk100.api.api.URLConstants;
-import com.aftershipsdk100.api.model.CustomFields;
-import com.aftershipsdk100.api.model.Tracking;
+import com.aftershipsdk100.sdk.api.ApiDataManager;
+import com.aftershipsdk100.sdk.api.ApiRequestDelegate;
+import com.aftershipsdk100.sdk.api.ApiResult;
+import com.aftershipsdk100.sdk.api.HttpRequest;
+import com.aftershipsdk100.sdk.api.URLConstants;
+import com.aftershipsdk100.sdk.model.CustomFields;
+import com.aftershipsdk100.sdk.model.Tracking;
 
 import java.util.ArrayList;
 import java.util.List;

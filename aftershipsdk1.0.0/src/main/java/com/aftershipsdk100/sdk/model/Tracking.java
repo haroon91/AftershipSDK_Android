@@ -1,4 +1,4 @@
-package com.aftershipsdk100.api.model;
+package com.aftershipsdk100.sdk.model;
 
 import java.util.Date;
 import java.util.List;

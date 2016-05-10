@@ -1,10 +1,10 @@
-package com.aftershipsdk100.api.api;
+package com.aftershipsdk100.sdk.api;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.aftershipsdk100.BuildConfig;
-import com.aftershipsdk100.api.model.Tracking;
+import com.aftershipsdk100.sdk.model.Tracking;
 
 import org.json.JSONException;
 import org.json.JSONObject;

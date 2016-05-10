@@ -1,4 +1,4 @@
-package com.aftershipsdk100.api.api;
+package com.aftershipsdk100.sdk.api;
 
 
 /**
