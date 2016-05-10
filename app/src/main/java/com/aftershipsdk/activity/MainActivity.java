@@ -22,6 +22,8 @@ public class MainActivity extends Activity implements ApiRequestDelegate {
     Handler mHandler = new Handler();
     Runnable runnable;
 
+    private static final String API_KEY = "0d675b8f-7a3c-4f98-b1b8-46824a791174";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +42,9 @@ public class MainActivity extends Activity implements ApiRequestDelegate {
         customFields.product_price = "USD19.99";
 
 //        ApiDataManager.getInstance().createTracking("dhl","4134837490","title name",smses, emails,
-//                "ID 1234","http://www.www.com", customFields, this);
+//                "ID 1234","http://www.www.com", customFields, this, API_KEY);
 
-        ApiDataManager.getInstance().requestSingleTracking("fedex","671821155064",MainActivity.this);
-
-    }
-
-    @Override
-    public void apiOnRequest() {
+        ApiDataManager.getInstance().requestSingleTracking("fedex","671821155064",MainActivity.this, API_KEY);
 
     }
 

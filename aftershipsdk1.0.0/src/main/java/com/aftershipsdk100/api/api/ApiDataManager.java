@@ -18,13 +18,21 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApiDataManager implements HttpRequestDelegate {
+/**
+ * Manages all the http request (GET or POST) that are sent to the server
+ * Also manages the JSON responses received and parses into customized
+ * object accordingly, depending on the type of request
+ */
 
-    private static final String TAG = "ApiDataManager";
+public class ApiDataManager implements HttpRequestDelegate {
 
     // Singleton
     private static ApiDataManager instance = null;
 
+    /**
+     * Creation of the singleton object (if necessary)
+     * @return singleton object
+     */
     public static ApiDataManager getInstance() {
         if (instance == null){
             instance = new ApiDataManager();
@@ -33,9 +41,21 @@ public class ApiDataManager implements HttpRequestDelegate {
         return instance;
     }
 
+    /**
+     * Sends an HTTP POST request in order to create a tracking
+     * @param slug Unique code of courier
+     * @param trackingNo Tracking number of a shipment
+     * @param title Title of the tracking
+     * @param smses Phone number(s) to receive sms notifications
+     * @param emails Email address(es) to receive email notifications
+     * @param orderId Text field for order ID
+     * @param orderIdPath Text field for order ID path
+     * @param customFields Custom fields that accept any text string
+     * @param requestDelegate interface reference
+     */
     public void createTracking(String slug, String trackingNo, String title, List<String> smses,
                                List<String> emails, String orderId, String orderIdPath,
-                               CustomFields customFields, ApiRequestDelegate requestDelegate) {
+                               CustomFields customFields, ApiRequestDelegate requestDelegate, String API_KEY) {
 
         HttpRequest httpRequest = new HttpRequest();
         httpRequest.url = URLConstants.URL_ENDPOINT + URLConstants.URL_CREATE_TRACKING;
@@ -43,6 +63,7 @@ public class ApiDataManager implements HttpRequestDelegate {
         httpRequest.method = HttpRequest.METHOD_POST;
         httpRequest.requestDelegate = requestDelegate;
         httpRequest.delegate = this;
+        httpRequest.setKey(API_KEY);
 
         Tracking trackingObject = new Tracking();
         trackingObject.slug = slug;
@@ -58,7 +79,13 @@ public class ApiDataManager implements HttpRequestDelegate {
         this.doHttpRequest(httpRequest);
     }
 
-    public void requestSingleTracking (String slug, String trackingNo, ApiRequestDelegate requestDelegate){
+    /**
+     * Send an HTTP GET request to get tracking results of a single tracking
+     * @param slug Unique code of courier
+     * @param trackingNo Tracking number of a shipment
+     * @param requestDelegate interface reference
+     */
+    public void requestSingleTracking (String slug, String trackingNo, ApiRequestDelegate requestDelegate, String API_KEY){
 
         HttpRequest httpRequest = new HttpRequest();
         httpRequest.url = URLConstants.URL_ENDPOINT + String.format(URLConstants.URL_GET_SINGLE_TRACKING, slug, trackingNo);
@@ -66,17 +93,23 @@ public class ApiDataManager implements HttpRequestDelegate {
         httpRequest.method = HttpRequest.METHOD_GET;
         httpRequest.requestDelegate = requestDelegate;
         httpRequest.delegate = this;
+        httpRequest.setKey(API_KEY);
 
         this.doHttpRequest(httpRequest);
     }
 
+    /**
+     * Makes the HTTP Request
+     * @param httpRequest HTTP Request object
+     */
     private void doHttpRequest(HttpRequest httpRequest) {
-        if (httpRequest.requestDelegate != null)
-            httpRequest.requestDelegate.apiOnRequest();
-
         httpRequest.doRequest();
     }
 
+    /**
+     *
+     * @param httpRequest the original http request that was made
+     */
     @Override
     public void requestCompleted(HttpRequest httpRequest) {
 
@@ -103,6 +136,11 @@ public class ApiDataManager implements HttpRequestDelegate {
         }
     }
 
+    /**
+     * Parses the JSON response into a Tracking object
+     * @param valueJson the JSON response
+     * @return Tracking object
+     */
     private Tracking parseTracking (JSONObject valueJson) {
 
         if (valueJson.has("tracking")) {
@@ -192,6 +230,11 @@ public class ApiDataManager implements HttpRequestDelegate {
         return null;
     }
 
+    /**
+     * Determines whether the http request was valid or not using the http response codes
+     * @param responseString JSON response
+     * @return ApiResultWithValueMap
+     */
     private ApiResultWithValueMap parseSuccessFailResult(String responseString) {
         ApiResultWithValueMap result = new ApiResultWithValueMap();
 
@@ -228,17 +271,28 @@ public class ApiDataManager implements HttpRequestDelegate {
         }
     }
 
+    /**
+     * Incase of a request fail, it displays a message explaining the reason of the request failure
+     * @param reason Request failure reason
+     * @param title Request failure title
+     * @param activity The activity from which the request is called
+     */
     public static void handleMessageForReason(String reason, String title, final Activity activity) {
         if (title == null) {
-            title = "错误";
+            title = "";
         }
 
-        //For AUTH_* errors, display alert box and go back to the Main Activity for login
         if (reason != null ){
             displayMessage(reason, title, activity);
         }
     }
 
+    /**
+     * Constructs an Alert Dialog displaying the reason of request failure
+     * @param message Request failure reason
+     * @param title Request failure title
+     * @param activity The activity from which the request is called
+     */
     private static void displayMessage(String message, String title, final Activity activity) {
         // Need to use Activity.this (Cannot use the Context to build the Dialog
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
@@ -253,6 +307,9 @@ public class ApiDataManager implements HttpRequestDelegate {
         alertDialog.show();
     }
 
+    /**
+     * A custom data-structure that contains the JSON response and its success/failure status
+     */
     private class ApiResultWithValueMap{
         public ApiResult apiResult;
         public JSONObject valueJson;

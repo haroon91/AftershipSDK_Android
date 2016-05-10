@@ -29,9 +29,12 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+/**
+ * Establishes connnection with the server in order to send http requests
+ */
 public class HttpRequest {
 
-    private static final String API_KEY = "0d675b8f-7a3c-4f98-b1b8-46824a791174";
+    private String key;
 
     public static final String METHOD_GET = "GET";
     public static final String METHOD_POST = "POST";
@@ -49,16 +52,21 @@ public class HttpRequest {
 
     private Map<String,String> postMap = new HashMap<>();
 
-    //for limit rate handling
-
     public void putPostParams(String key, String value) {
         postMap.put(key, value);
+    }
+
+    public void setKey(String key){
+        this.key = key;
     }
 
     public void setTrackingObjectParams(Tracking trackingObject){
         this.trackingObject = trackingObject;
     }
 
+    /**
+     * Initiates an async task thread for communication with the server
+     */
     public void doRequest() {
         new HttpRequestTask().execute();
     }
@@ -98,6 +106,9 @@ public class HttpRequest {
         }
     }
 
+    /**
+     * Aysnc task class for communication between client and server
+     */
     private class HttpRequestTask extends AsyncTask<Void, Void, String> {
 
         @Override
@@ -135,7 +146,7 @@ public class HttpRequest {
                 conn.setRequestMethod(method);
                 conn.setDoInput(true);
                 conn.setRequestProperty("aftership-user-agent", "aftership-android-sdk " + BuildConfig.VERSION_NAME);
-                conn.setRequestProperty("aftership-api-key", API_KEY);
+                conn.setRequestProperty("aftership-api-key", key);
                 conn.setRequestProperty("Content-Type", "application/json");
 
                 if (METHOD_POST.equals(method)) {
@@ -179,7 +190,11 @@ public class HttpRequest {
 
         }
 
-        // Build string out of key / values
+        /**
+         * Build a request json string out of key / values
+         * @return String
+         * @throws JSONException
+         */
         private String makeQueryString() throws JSONException {
             if (trackingObject == null) {
                 return "";

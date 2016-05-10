@@ -1,5 +1,8 @@
 package com.aftershipsdk100.api.api;
 
+/**
+ * A place for declaring the URLs
+ */
 public class URLConstants {
 
     public static final String URL_ENDPOINT = "https://api.aftership.com/v4/";
