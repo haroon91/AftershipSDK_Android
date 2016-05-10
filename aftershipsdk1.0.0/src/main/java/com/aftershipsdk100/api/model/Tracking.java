@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by Haroon on 3/5/2016.
+ * Data structure for information about trackings
  */
 public class Tracking {
 

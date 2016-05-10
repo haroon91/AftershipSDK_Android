@@ -3,7 +3,7 @@ package com.aftershipsdk100.api.model;
 import java.util.Date;
 
 /**
- * Created by Haroon on 3/5/2016.
+ * Data structure for information about checkpoints of a tracking
  */
 public class Checkpoint {
 

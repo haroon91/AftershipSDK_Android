@@ -1,7 +1,7 @@
 package com.aftershipsdk100.api.model;
 
 /**
- * Created by Haroon on 3/5/2016.
+ * Data structure for information about custom fields inside of a tracking detail
  */
 public class CustomFields {
 
