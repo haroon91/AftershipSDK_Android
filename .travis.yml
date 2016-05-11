@@ -18,6 +18,8 @@ android:
         - android-$EMULATOR_API_LEVEL
         - extra-android-support
 
+        - aftershipsdk1.0.0
+
         # Specify at least one system image,
         # if you need to run emulator(s) during your tests
         - sys-img-armeabi-v7a-android-21
