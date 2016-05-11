@@ -17,16 +17,17 @@ All the API calls are managed by the `ApiDataManager` class. This is a singleton
     
     
 
-There are three steps involved that can help us to make the required API calls and get the response.
+There are four steps involved that can help us to make the required API calls and get the response.
 
-  1. First we implement the `ApiRequestDelegate` interface in our `Activity/Fragment` from where we are making the API call. The purpose of the `ApiRequestDelegate` is to enable the `Activity/Fragment` to receive asynchronous response on the API call that we made.
-  2. Secondly we call the apporporiate method in `ApiDataManager` class that will make the http request.
-  3. Finally we implement the `apiCompleted()` method in `ApiRequestDelegate` interface that helps us to get the response from the API call we made.
+  1. Firstly, declare the API key as a static final variable in your activity.   
+  2. Secondly, we implement the `ApiRequestDelegate` interface in our `Activity/Fragment` from where we are making the API call. The purpose of the `ApiRequestDelegate` is to enable the `Activity/Fragment` to receive asynchronous response on the API call that we made.
+  3. Thirdly, we call the apporporiate method in `ApiDataManager` class that will make the http request.
+  4. Finally, we implement the `apiCompleted()` method in `ApiRequestDelegate` interface that helps us to get the response from the API call we made.
   
 In case of  <a href="https://www.aftership.com/docs/api/4/trackings/post-trackings">POST /trackings</a> we use the `createTracking()` method since this API call creates a tracking.
 
       ApiDataManager.getInstance()
-      .createTracking(slug, trackingNo, title, smses, emails, orderId, orderIdPath, customFields, apiRequestDelegate);
+      .createTracking(slug, trackingNo, title, smses, emails, orderId, orderIdPath, customFields, apiRequestDelegate, API_KEY);
       
       
 Then we implement the `apiCompleted()` as follows:
@@ -49,13 +50,15 @@ Then we implement the `apiCompleted()` as follows:
   
       public class MainActivity extends Activity implements ApiRequestDelegate {
       
+        private static final String API_KEY = "0d675b8f-7a3c-4f98-b1b8-46824a791174";
+      
         @Override
         protected void onCreate(Bundle savedInstanceState) {
           super.onCreate(savedInstanceState);
           setContentView(R.layout.activity_main);
           
           ...
-          ApiDataManager.getInstance().createTracking("dhl","4134837490","title name",smses, emails, "ID 1234","http://www.www.com", customFields, this);
+          ApiDataManager.getInstance().createTracking("dhl","4134837490","title name",smses, emails, "ID 1234","http://www.www.com", customFields, this, API_KEY);
         }
         
          @Override
@@ -73,7 +76,7 @@ Then we implement the `apiCompleted()` as follows:
 
 In case of  <a href="https://www.aftership.com/docs/api/4/trackings/get-trackings-slug-tracking_number">GET /trackings/:slug/:tracking_number</a> we use the `requestSingleTracking()` method since this API call gets the tracking results of a single tracking.
 
-      ApiDataManager.getInstance().requestSingleTracking(slug, trackingNo, apiRequestDelegate);
+      ApiDataManager.getInstance().requestSingleTracking(slug, trackingNo, apiRequestDelegate, API_KEY);
 
 The procedure of getting the response is the same as is detailed above.
 
