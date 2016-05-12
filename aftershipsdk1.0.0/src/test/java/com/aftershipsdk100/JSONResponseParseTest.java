@@ -1,6 +1,6 @@
 package com.aftershipsdk100;
 
-import com.aftershipsdk100.api.api.ApiDataManager;
+import com.aftershipsdk100.sdk.api.ApiDataManager;
 
 import org.json.JSONObject;
 import org.junit.Test;
