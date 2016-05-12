@@ -18,7 +18,7 @@ android:
         - android-$EMULATOR_API_LEVEL
         - extra-android-support
 
-        - aftershipsdk1.0.0
+        - extra-aftershipsdk1.0.0
 
         # Specify at least one system image,
         # if you need to run emulator(s) during your tests
