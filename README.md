@@ -9,7 +9,7 @@ The two API end points supported by this SDK are:
 
 For more information about these API calls please follow the link on each of them.
 
-This repository contains the SDK (folder = aftershipsdk1.0.0) and a sample Android app to show the implementation of the SDK (folder = app)
+This repository contains the SDK `(folder = aftershipsdk1.0.0)` and a sample Android app to show the implementation of the SDK `(folder = app)`
 
 # Usage
 
