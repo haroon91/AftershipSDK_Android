@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AftershipSDK_Android.iml" filepath="$PROJECT_DIR$/AftershipSDK_Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CgMKAQkBCwUEDgcMBAcBDQ.iml" filepath="$PROJECT_DIR$/CgMKAQkBCwUEDgcMBAcBDQ.iml" />
       <module fileurl="file://$PROJECT_DIR$/aftershipsdk1.0.0/aftershipsdk1.0.0.iml" filepath="$PROJECT_DIR$/aftershipsdk1.0.0/aftershipsdk1.0.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
